@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <title>:my wedsite "</title>
+    <style>
+    .box-thong-tin{
+        background-color: pink;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    .box-lien-he{
+        background-color: #6acae7;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    .main-container{
+        display: flex;
+        justify-content: space-between;
+    }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+    <div class="box-thong-tin">
+        <h2>Vũ Bình Lâm</h2>
+        <input type="number" placeholder ="nhập năm sinh của bạn" id="namsinh"><br><br>
+        <p>Tuổi của bạn: <span id="tuoi">0</span></p>
+        <ol>
+            <li> HTML</li>
+            <li>css</li>
+            <li>javascript</li>
+        </ol>
+        <a href="https://www.google.com/?hl=vi&zx=1781660867379" target="_blank">bấm vô đây để đi đến google</a>
+        <button type="doimau">Đổi màu nền</button>
+    </div>
+    <div class="box-lien-he">
+        <form>
+        <h2>Gửi LỜi nhắn</h2>
+        <label>EMAIL:</label>
+        <input type="email" id="name" placeholder ="Nhập email của bạn"><br><br>
+        <label>MESSAGE:</label>
+        <textarea id="message" placeholder="Nhập lời nhắn của bạn"></textarea><br><br>
+        <button type="submit">Gửi Đi</button>
+        </form>
+    </div>
+    </div>
+    <table border="1" id="lichhoc">
+        <tr>
+            <th>======</th>
+            <th>Lịch học trong tuần</th>
+            <th>======</th>
+        </tr>
+        <tr>
+            <td> thứ</td>
+            <td> môn học</td>
+            <td> thời gian</td> 
+        </tr>
+    </table>
+    <h3> Sở thích của tôi </h3>
+    <ul id="sothich"></ul>       
+    <script>
+    const button = document.querySelector('button[type="submit"]');
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const emailInput = document.getElementById('name');
+        const messageInput = document.getElementById('message');
+        const email = emailInput.value;
+        const message = messageInput.value;
+        if (email && message) {
+            alert(`Email: ${email}\nMessage: ${message}`);
+            emailInput.value = '';
+            messageInput.value = '';
+        } else {
+            alert('Vui lòng nhập đầy đủ thông tin!');
+        }
+    });    
+    const doimau = document.querySelector('[type="doimau"]');
+    doimau.addEventListener('click', function() {
+    if (document.body.style.backgroundColor === 'lightblue') {
+    document.body.style.backgroundColor = 'white';
+} else {
+    document.body.style.backgroundColor = 'lightblue';
+}
+    });
+    function tinhtuoi(namsinh) {
+        const namhientai = new Date().getFullYear();
+        return namhientai - namsinh;
+    }
+    const namsinhInput = document.getElementById('namsinh');
+    const tuoiSpan = document.getElementById('tuoi');
+    namsinhInput.addEventListener('input', function() {
+        const namsinh = parseInt(this.value);
+        const tuoi = tinhtuoi(namsinh);
+        tuoiSpan.textContent = tuoi;
+    });
+    const danhsachsothich=['đi chơi', 'xem phim', 'nấu ăn'];
+    console.log('Danh sách sở thích của tôi:');
+    danhsachsothich.forEach(function(sothich, index) {
+        console.log(`${index + 1}. ${sothich}`);
+        const li = document.createElement('li');
+        li.textContent = sothich;
+        document.getElementById('sothich').appendChild(li);
+    });
+const lichhoc = [
+    { thu: 'Thứ 2', monhoc: 'Toán, Văn, Anh', thoigian: '14h30' },
+    { thu: 'Thứ 3', monhoc: 'Lý, Hóa, Sinh', thoigian: '15h30' },
+    { thu: 'Thứ 4', monhoc: 'Sử, Địa, GDCD', thoigian: '16h30' },
+    { thu: 'Thứ 5', monhoc: 'Tin học, Thể dục', thoigian: '17h30' },
+    { thu: 'Thứ 6', monhoc: 'Âm nhạc, Mỹ thuật', thoigian: '18h30' }
+];
+console.log('Lịch học trong tuần:');
+lichhoc.forEach(function(item) {
+    console.log(`${item.thu}: ${item.monhoc} - ${item.thoigian}`);
+});
+const table = document.getElementById('lichhoc');
+lichhoc.forEach(function(item) {
+    const row = table.insertRow();
+    const cellThu = row.insertCell(0);
+    const cellMonhoc = row.insertCell(1);
+    const cellThoigian = row.insertCell(2);
+    cellThu.textContent = item.thu;
+    cellMonhoc.textContent = item.monhoc;
+    cellThoigian.textContent = item.thoigian;
+});
+    </script>
+</body>
+</html
