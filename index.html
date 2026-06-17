@@ -75,12 +75,18 @@
         }
     });    
     const doimau = document.querySelector('[type="doimau"]');
+    const mauDaLuu = localStorage.getItem('mauNen');
+    if (mauDaLuu) {
+        document.body.style.backgroundColor = mauDaLuu; // Nếu có thì đổi nền ngay lập tức
+    }
     doimau.addEventListener('click', function() {
-    if (document.body.style.backgroundColor === 'lightblue') {
-    document.body.style.backgroundColor = 'white';
-} else {
-    document.body.style.backgroundColor = 'lightblue';
-}
+        if (document.body.style.backgroundColor === 'lightblue') {
+            document.body.style.backgroundColor = 'white';
+            localStorage.setItem('mauNen', 'white'); // Ghi nhớ vào tủ lạnh: "chọn màu trắng"
+        } else {
+            document.body.style.backgroundColor = 'lightblue';
+            localStorage.setItem('mauNen', 'lightblue'); // Ghi nhớ vào tủ lạnh: "chọn màu xanh"
+        }
     });
     function tinhtuoi(namsinh) {
         const namhientai = new Date().getFullYear();
